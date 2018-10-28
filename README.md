@@ -1,6 +1,9 @@
-# React & Apollo Tutorial
+# Resource Backend Take-home
 
-This is the sample project that belongs to the [React & Apollo Tutorial](https://www.howtographql.com/react-apollo/0-introduction/) on How to GraphQL.
+This is the sample project that belongs to the [React & Apollo Tutorial](https://www.howtographql.com/react-apollo/0-introduction/) on How to GraphQL. It's a fully implemented Hackernews app with a simple setup process (see below).
+
+## The Problem
+We've modified the sample app to include a new data model (Comment) and the frontend to display the comments for each post. Your challenge is to build (fullstack) the ability to create comments in the app!
 
 ## Running the App
 
