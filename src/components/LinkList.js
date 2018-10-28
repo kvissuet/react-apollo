@@ -22,6 +22,15 @@ export const FEED_QUERY = gql`
             id
           }
         }
+        comments {
+          id
+          user {
+            id
+            name
+          }
+          content
+          createdAt
+        }
       }
       count
     }
@@ -45,6 +54,15 @@ const NEW_LINKS_SUBSCRIPTION = gql`
           user {
             id
           }
+        }
+        comments {
+          id
+          user {
+            id
+            name
+          }
+          content
+          createdAt
         }
       }
     }
