@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
+import Comment from './Comment.js';
 import { AUTH_TOKEN } from '../constants'
 import { timeDifferenceForDate } from '../utils'
 import { Mutation } from 'react-apollo'
@@ -26,9 +28,10 @@ const VOTE_MUTATION = gql`
 class Link extends Component {
   render() {
     const authToken = localStorage.getItem(AUTH_TOKEN)
+    const comments = this.props.link.comments;
 
     return (
-      <div className="flex mt2 items-start">
+      <div className="flex mt2 items-start" style={{ marginBottom: 20}}>
         <div className="flex items-center">
           <span className="gray">{this.props.index + 1}.</span>
           {authToken && (
@@ -57,7 +60,17 @@ class Link extends Component {
               ? this.props.link.postedBy.name
               : 'Unknown'}{' '}
             {timeDifferenceForDate(this.props.link.createdAt)}
+            {' '}
+            <RouterLink to={`/${this.props.link.id}/createComment`}>comment</RouterLink>
           </div>
+          {!!comments.length &&
+            comments.map(({ content, id, user, createdAt }) => (
+              <Comment key={id} 
+                userName={user ? user.name : null} 
+                createdAt={createdAt} 
+                text={content} />
+            ))
+          }
         </div>
       </div>
     )
