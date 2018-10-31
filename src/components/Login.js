@@ -9,7 +9,7 @@ const SIGNUP_MUTATION = gql`
       token
     }
   }
-`
+`;
 
 const LOGIN_MUTATION = gql`
   mutation LoginMutation($email: String!, $password: String!) {
@@ -17,7 +17,7 @@ const LOGIN_MUTATION = gql`
       token
     }
   }
-`
+`;
 
 class Login extends Component {
   state = {
@@ -25,7 +25,7 @@ class Login extends Component {
     email: '',
     password: '',
     name: '',
-  }
+  };
 
   render() {
     const { login, email, password, name } = this.state

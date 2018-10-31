@@ -11,7 +11,7 @@ async function feed(parent, args, context, info) {
   const queriedLinkes = await context.db.query.links(
     { where, skip: args.skip, first: args.first, orderBy: args.orderBy },
     `{ id }`,
-  )
+  );
 
   const countSelectionSet = `
     {
@@ -19,7 +19,7 @@ async function feed(parent, args, context, info) {
         count
       }
     }
-  `
+  `;
   const linksConnection = await context.db.query.linksConnection({}, countSelectionSet)
 
   return {

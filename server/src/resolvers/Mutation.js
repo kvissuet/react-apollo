@@ -16,6 +16,20 @@ function post(parent, args, context, info) {
   )
 }
 
+function comment(parent, args, context, info) {
+    const userId = getUserId(context)
+    return context.db.mutation.createComment(
+        {
+            data: {
+                content: args.content,
+                link: { connect: { id: args.link } },
+                user: { connect: { id: userId } }
+            },
+        },
+        info,
+    )
+}
+
 async function signup(parent, args, context, info) {
   const password = await bcrypt.hash(args.password, 10)
   const user = await context.db.mutation.createUser({
@@ -70,6 +84,7 @@ async function vote(parent, args, context, info) {
 
 module.exports = {
   post,
+  comment,
   signup,
   login,
   vote

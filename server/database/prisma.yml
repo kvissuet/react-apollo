@@ -3,3 +3,5 @@ secret: mysecret123
 hooks:
   post-deploy:
     - yarn graphql get-schema --project database
+
+endpoint: https://us1.prisma.sh/kevin-vissuet-471774/resource-takehome/dev
