@@ -7,6 +7,7 @@ import { LINKS_PER_PAGE } from '../constants'
 const POST_MUTATION = gql`
   mutation CommentMutation($content: String!, $link: String!) {
     comment(content: $content, link: $link) {
+      id
       content
     }
   }
@@ -38,7 +39,7 @@ class CreateComment extends Component {
 
                     variables={{ content, link }}
                     onCompleted={() => this.props.history.push('/new/1')}
-                    update={(store, { data: { post } }) => {
+                    update={(store, { data: { comment } }) => {
                         const first = LINKS_PER_PAGE;
                         const skip = 0;
                         const orderBy = 'createdAt_DESC';
@@ -46,7 +47,11 @@ class CreateComment extends Component {
                             query: FEED_QUERY,
                             variables: { first, skip, orderBy },
                         });
-                        data.feed.comments.unshift(post);
+                        console.log(comment);
+                        const linkId = link;
+                        const commentLink = data.feed.links.find(link => link.id === linkId);
+                        commentLink.comments.unshift(comment);
+
                         store.writeQuery({
                             query: FEED_QUERY,
                             data,
