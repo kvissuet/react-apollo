@@ -20,7 +20,7 @@ class App extends Component {
             <Route exact path="/search" component={Search} />
             <Route exact path="/top" component={LinkList} />
             <Route exact path="/new/:page" component={LinkList} />
-            <Route exact path="/:link/createComment" component={CreateComment} />
+            <Route exact path="/:linkId/createComment" component={CreateComment} />
           </Switch>
         </div>
       </div>

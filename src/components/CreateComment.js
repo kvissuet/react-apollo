@@ -9,6 +9,7 @@ const POST_MUTATION = gql`
     comment(content: $content, link: $link) {
       id
       content
+      createdAt
     }
   }
 `;
@@ -20,7 +21,7 @@ class CreateComment extends Component {
 
     render() {
         const { content } = this.state;
-        const { link } = this.props.match.params;
+        const { linkId } = this.props.match.params;
         return (
             <div>
                 <div className="flex flex-column mt3">
@@ -37,7 +38,7 @@ class CreateComment extends Component {
                 <Mutation
                     mutation={POST_MUTATION}
 
-                    variables={{ content, link }}
+                    variables={{ content, link:linkId }}
                     onCompleted={() => this.props.history.push('/new/1')}
                     update={(store, { data: { comment } }) => {
                         const first = LINKS_PER_PAGE;
@@ -47,8 +48,7 @@ class CreateComment extends Component {
                             query: FEED_QUERY,
                             variables: { first, skip, orderBy },
                         });
-                        console.log(comment);
-                        const linkId = link;
+
                         const commentLink = data.feed.links.find(link => link.id === linkId);
                         commentLink.comments.unshift(comment);
 
